@@ -20,17 +20,7 @@
                     </form>
                 </div>
             </div>
-            <div
-                class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
-                <div class="support-box text-end d-none d-xl-block">
-                    <span class="fs-6 secondary-font text-muted">Phone</span>
-                    <h5 class="mb-0">+980-34984089</h5>
-                </div>
-                <div class="support-box text-end d-none d-xl-block">
-                    <span class="fs-6 secondary-font text-muted">Email</span>
-                    <h5 class="mb-0">waggy@gmail.com</h5>
-                </div>
-            </div>
+
         </div>
     </div>
     <div class="container-fluid">
@@ -89,18 +79,29 @@
                         <li class="nav-item">
                             <a href="{{ url('/') }}" class="nav-link active">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link">Contact</a>
-                        </li>
                         @auth
+                            <li class="nav-item">
+                                <a href="{{ route('customer.orders.index') }}" class="nav-link">Riwayat Pesanan</a>
+                            </li>
                             @if (Auth::user()->role == 'Adminstrator')
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard') }}" class="nav-link active">Kembali ke dashboard</a>
                                 </li>
                             @endif
+                            <li class="nav-item">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                        class="nav-link btn btn-link text-decoration-none">Logout</button>
+                                </form>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a href="{{ route('login') }}" class="nav-link">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('register') }}" class="nav-link">Register</a>
+                            </li>
                         @endauth
                     </ul>
                     <div class="d-none d-lg-flex align-items-end">
@@ -112,8 +113,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index.html" class="mx-3">
-                                    <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
+                                <a href="{{ url('/') }}" class="mx-3">
+                                    {{ Auth::user()->name ?? 'Guest' }} {{-- Menampilkan nama pengguna jika login, atau 'Guest' jika tidak --}}
                                 </a>
                             </li>
                             <li class="">

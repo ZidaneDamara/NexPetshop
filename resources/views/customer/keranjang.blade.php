@@ -105,7 +105,8 @@
                                     </li>
                                 </ul>
                                 <div class="d-grid gap-2 mt-4">
-                                    <a href="#" class="btn btn-primary btn-lg">Lanjutkan ke Checkout</a>
+                                    <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-lg">Lanjutkan ke
+                                        Checkout</a> {{-- Perbaikan di sini --}}
                                     <a href="{{ route('home') }}" class="btn btn-outline-secondary btn-lg">Lanjutkan
                                         Belanja</a>
                                 </div>

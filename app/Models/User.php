@@ -21,7 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role', // Pastikan 'role' ada di fillable jika Anda menggunakannya
+        'role',
+        'address', // Tambahkan ini jika Anda ingin menyimpan alamat di tabel users
+        'phone',   // Tambahkan ini jika Anda ingin menyimpan telepon di tabel users
     ];
 
     /**
@@ -50,5 +52,13 @@ class User extends Authenticatable
     public function keranjang()
     {
         return $this->hasMany(Keranjang::class);
+    }
+
+    /**
+     * Get the orders for the user.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
