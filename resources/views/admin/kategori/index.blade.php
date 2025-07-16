@@ -8,7 +8,7 @@
                 <h6 class="op-7 mb-2">Manajemen data kategori hewan</h6>
             </div>
             <div class="ms-md-auto py-2 py-md-0">
-                <a href="{{ route('kategori-hewan.create') }}" class="btn btn-primary btn-round">Tambah Kategori</a>
+                <a href="{{ route('kategori.create') }}" class="btn btn-primary btn-round">Tambah Kategori</a>
             </div>
         </div>
 
@@ -43,10 +43,10 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->nama_kategori }}</td>
                                             <td>
-                                                <a href="{{ route('kategori-hewan.edit', $item->id) }}"
+                                                <a href="{{ route('kategori.edit', $item->id) }}"
                                                     class="btn btn-warning btn-sm">Edit</a>
-                                                <form action="{{ route('kategori-hewan.destroy', $item->id) }}"
-                                                    method="POST" class="d-inline">
+                                                <form action="{{ route('kategori.destroy', $item->id) }}" method="POST"
+                                                    class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"

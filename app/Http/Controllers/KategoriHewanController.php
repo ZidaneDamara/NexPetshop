@@ -28,31 +28,31 @@ class KategoriHewanController extends Controller
             'nama_kategori' => $request->nama_kategori,
         ]);
 
-        return redirect()->route('kategori-hewan.index')->with('success', 'Kategori berhasil ditambahkan.');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
     }
 
-    public function edit(KategoriHewan $kategori_hewan)
+    public function edit(KategoriHewan $kategori)
     {
-        return view('admin.kategori.edit', compact('kategori_hewan'));
+        return view('admin.kategori.edit', compact('kategori'));
     }
 
-    public function update(Request $request, KategoriHewan $kategori_hewan)
+    public function update(Request $request, KategoriHewan $kategori)
     {
         $request->validate([
             'nama_kategori' => 'required|string|max:255',
         ]);
 
-        $kategori_hewan->update([
+        $kategori->update([
             'nama_kategori' => $request->nama_kategori,
         ]);
 
-        return redirect()->route('kategori-hewan.index')->with('success', 'Kategori berhasil diperbarui.');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui.');
     }
 
-    public function destroy(KategoriHewan $kategori_hewan)
+    public function destroy(KategoriHewan $kategori)
     {
-        $kategori_hewan->delete();
+        $kategori->delete();
 
-        return redirect()->route('kategori-hewan.index')->with('success', 'Kategori berhasil dihapus.');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus.');
     }
 }

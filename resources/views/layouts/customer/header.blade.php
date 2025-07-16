@@ -94,50 +94,26 @@
                 </div>
 
                 <div class="offcanvas-body justify-content-between">
-                    <select class="filter-categories border-0 mb-0 me-5">
-                        <option>Shop by Category</option>
-                        <option>Clothes</option>
-                        <option>Food</option>
-                        <option>Food</option>
-                        <option>Toy</option>
-                    </select>
+
 
                     <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
                         <li class="nav-item">
-                            <a href="index.html" class="nav-link active">Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown"
-                                aria-expanded="false">Pages</a>
-                            <ul class="dropdown-menu" aria-labelledby="pages">
-                                <li><a href="index.html" class="dropdown-item">About Us</a></li>
-                                <li><a href="index.html" class="dropdown-item">Shop</a></li>
-                                <li><a href="index.html" class="dropdown-item">Single Product</a></li>
-                                <li><a href="index.html" class="dropdown-item">Cart</a></li>
-                                <li><a href="index.html" class="dropdown-item">Wishlist</a></li>
-                                <li><a href="index.html" class="dropdown-item">Checkout</a></li>
-                                <li><a href="index.html" class="dropdown-item">Blog</a></li>
-                                <li><a href="index.html" class="dropdown-item">Single Post</a></li>
-                                <li><a href="index.html" class="dropdown-item">Contact</a></li>
-                                <li><a href="index.html" class="dropdown-item">FAQs</a></li>
-                                <li><a href="index.html" class="dropdown-item">Account</a></li>
-                                <li><a href="index.html" class="dropdown-item">Thankyou</a></li>
-                                <li><a href="index.html" class="dropdown-item">Error 404</a></li>
-                                <li><a href="index.html" class="dropdown-item">Styles</a></li>
-                            </ul>
+                            <a href="{{ url('/') }}" class="nav-link active">Home</a>
                         </li>
                         <li class="nav-item">
                             <a href="index.html" class="nav-link">Shop</a>
                         </li>
                         <li class="nav-item">
-                            <a href="index.html" class="nav-link">Blog</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="index.html" class="nav-link">Contact</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link">Others</a>
-                        </li>
+                        @auth
+                            @if (Auth::user()->role == 'Adminstrator')
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard') }}" class="nav-link active">Kembali ke dashboard</a>
+                                </li>
+                            @endif
+                        @endauth
+
                     </ul>
 
                     <div class="d-none d-lg-flex align-items-end">

@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HewanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriHewanController;
 use App\Http\Controllers\RekeningPembayaranController;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/hewan/{hewan}', [HomeController::class, 'showHewan'])->name('hewan.customer.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -20,9 +20,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //Route Master Data
-    route::resource('kategori-hewan', KategoriHewanController::class);
-    Route::resource('hewan', HewanController::class);
-    Route::resource('rekening-pembayaran', RekeningPembayaranController::class);
+    Route::prefix('admin')->group(function () {
+        Route::resource('kategori', KategoriHewanController::class);
+        Route::resource('hewan', HewanController::class);
+        Route::resource('rekening-pembayaran', RekeningPembayaranController::class);
+    });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

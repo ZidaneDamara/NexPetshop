@@ -40,7 +40,7 @@
                     <div class="collapse" id="charts">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="{{ route('kategori-hewan.index') }}">
+                                <a href="{{ route('kategori.index') }}">
                                     <span class="sub-item">Kategori Hewan</span>
                                 </a>
                             </li>

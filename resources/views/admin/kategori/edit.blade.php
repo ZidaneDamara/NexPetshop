@@ -18,14 +18,14 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('kategori-hewan.update', $kategori_hewan->id) }}" method="POST">
+                        <form action="{{ route('kategori.update', ['kategori' => $kategori->id]) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
                                 <label for="nama_kategori" class="form-label">Nama Kategori</label>
                                 <input type="text" class="form-control @error('nama_kategori') is-invalid @enderror"
                                     id="nama_kategori" name="nama_kategori"
-                                    value="{{ old('nama_kategori', $kategori_hewan->nama_kategori) }}" required>
+                                    value="{{ old('nama_kategori', $kategori->nama_kategori) }}" required>
                                 @error('nama_kategori')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -33,7 +33,7 @@
                                 @enderror
                             </div>
                             <button type="submit" class="btn btn-primary">Perbarui</button>
-                            <a href="{{ route('kategori-hewan.index') }}" class="btn btn-secondary">Kembali</a>
+                            <a href="{{ route('kategori.index') }}" class="btn btn-secondary">Kembali</a>
                         </form>
                     </div>
                 </div>
