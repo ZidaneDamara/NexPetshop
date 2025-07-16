@@ -3,6 +3,18 @@
 @section('content')
     <section id="single-product" class="py-5">
         <div class="container">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-md-6">
                     <div class="product-image-wrapper">
@@ -47,20 +59,24 @@
                             </li>
                         </ul>
 
-                        <div class="d-flex align-items-center gap-3 mb-4">
-                            <input type="number" class="form-control w-25" value="1" min="1"
-                                max="{{ $hewan->stok }}">
-                            <button class="btn btn-primary btn-lg text-uppercase fs-6 rounded-1"
-                                {{ $hewan->stok == 0 ? 'disabled' : '' }}>
-                                Add to Cart
-                                <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                                    <use xlink:href="#cart"></use>
-                                </svg>
-                            </button>
-                            <a href="#" class="btn-wishlist px-4 pt-3 ">
-                                <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                            </a>
-                        </div>
+                        <form action="{{ route('keranjang.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="hewan_id" value="{{ $hewan->id }}">
+                            <div class="d-flex align-items-center gap-3 mb-4">
+                                <input type="number" name="jumlah" class="form-control w-25" value="1" min="1"
+                                    max="{{ $hewan->stok }}">
+                                <button type="submit" class="btn btn-primary btn-lg text-uppercase fs-6 rounded-1"
+                                    {{ $hewan->stok == 0 ? 'disabled' : '' }}>
+                                    Add to Cart
+                                    <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
+                                        <use xlink:href="#cart"></use>
+                                    </svg>
+                                </button>
+                                <a href="#" class="btn-wishlist px-4 pt-3 ">
+                                    <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
+                                </a>
+                            </div>
+                        </form>
 
                         <a href="{{ route('home') }}" class="btn btn-outline-secondary mt-3">
                             <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">

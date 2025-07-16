@@ -114,10 +114,6 @@
                 <div class="swiper-wrapper">
                     @forelse ($hewans as $hewan)
                         <div class="swiper-slide">
-                            {{-- Anda bisa menambahkan label 'New' atau 'Sale' di sini jika ada logika status --}}
-                            {{-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-                                New
-                            </div> --}}
                             <div class="card position-relative">
                                 <a href="{{ route('hewan.customer.show', $hewan->id) }}">
                                     @if ($hewan->gambar)
@@ -134,7 +130,6 @@
                                     </a>
                                     <div class="card-text">
                                         <span class="rating secondary-font">
-                                            {{-- Rating statis, bisa diganti dengan rating dinamis jika ada --}}
                                             <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                                             <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                                             <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
@@ -145,9 +140,16 @@
                                         <h3 class="secondary-font text-primary">Rp
                                             {{ number_format($hewan->harga, 0, ',', '.') }}</h3>
                                         <div class="d-flex flex-wrap mt-3">
-                                            <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                                                <h5 class="text-uppercase m-0">Add to Cart</h5>
-                                            </a>
+                                            <form action="{{ route('keranjang.store') }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                <input type="hidden" name="hewan_id" value="{{ $hewan->id }}">
+                                                <input type="hidden" name="jumlah" value="1">
+                                                <button type="submit" class="btn-cart me-3 px-4 pt-3 pb-3"
+                                                    {{ $hewan->stok == 0 ? 'disabled' : '' }}>
+                                                    <h5 class="text-uppercase m-0">Add to Cart</h5>
+                                                </button>
+                                            </form>
                                             <a href="#" class="btn-wishlist px-4 pt-3 ">
                                                 <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
                                             </a>

@@ -1,15 +1,13 @@
 <header>
     <div class="container py-2">
         <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
-
             <div class="col-sm-4 col-lg-3 text-center text-sm-start">
                 <div class="main-logo">
-                    <a href="index.html">
+                    <a href="{{ url('/') }}"> {{-- Mengubah link logo ke homepage --}}
                         <img src="{{ URL::asset('assets/frontend') }}/images/logo.png" alt="logo" class="img-fluid">
                     </a>
                 </div>
             </div>
-
             <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
                 <div class="search-bar border rounded-2 px-3 border-dark-subtle">
                     <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
@@ -22,7 +20,6 @@
                     </form>
                 </div>
             </div>
-
             <div
                 class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
                 <div class="support-box text-end d-none d-xl-block">
@@ -33,24 +30,19 @@
                     <span class="fs-6 secondary-font text-muted">Email</span>
                     <h5 class="mb-0">waggy@gmail.com</h5>
                 </div>
-
-
-
             </div>
         </div>
     </div>
-
     <div class="container-fluid">
         <hr class="m-0">
     </div>
-
     <div class="container">
         <nav class="main-menu d-flex navbar navbar-expand-lg ">
-
             <div class="d-flex d-lg-none align-items-end mt-3">
                 <ul class="d-flex justify-content-end list-unstyled m-0">
                     <li>
-                        <a href="account.html" class="mx-3">
+                        <a href="{{ Auth::check() ? route('profile.edit') : route('login') }}" class="mx-3">
+                            {{-- Link ke profil atau login --}}
                             <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
                         </a>
                     </li>
@@ -59,17 +51,21 @@
                             <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
                         </a>
                     </li>
-
                     <li>
-                        <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                            aria-controls="offcanvasCart">
+                        <a href="{{ route('keranjang.index') }}" class="mx-3"> {{-- Link langsung ke halaman keranjang --}}
                             <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
                             <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                                03
+                                {{-- Logika untuk menghitung item keranjang --}}
+                                @php
+                                    $cartItemCount = 0;
+                                    if (Auth::check()) {
+                                        $cartItemCount = Auth::user()->keranjang->sum('jumlah');
+                                    }
+                                @endphp
+                                {{ $cartItemCount }}
                             </span>
                         </a>
                     </li>
-
                     <li>
                         <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch"
                             aria-controls="offcanvasSearch">
@@ -78,24 +74,17 @@
                         </a>
                     </li>
                 </ul>
-
             </div>
-
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
-
                 <div class="offcanvas-header justify-content-center">
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-
                 <div class="offcanvas-body justify-content-between">
-
-
                     <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
                         <li class="nav-item">
                             <a href="{{ url('/') }}" class="nav-link active">Home</a>
@@ -113,13 +102,12 @@
                                 </li>
                             @endif
                         @endauth
-
                     </ul>
-
                     <div class="d-none d-lg-flex align-items-end">
                         <ul class="d-flex justify-content-end list-unstyled m-0">
                             <li>
-                                <a href="index.html" class="mx-3">
+                                <a href="{{ Auth::check() ? route('profile.edit') : route('login') }}" class="mx-3">
+                                    {{-- Link ke profil atau login --}}
                                     <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
                                 </a>
                             </li>
@@ -128,28 +116,26 @@
                                     <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
                                 </a>
                             </li>
-
                             <li class="">
-                                <a href="index.html" class="mx-3" data-bs-toggle="offcanvas"
-                                    data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                                <a href="{{ route('keranjang.index') }}" class="mx-3"> {{-- Link langsung ke halaman keranjang --}}
                                     <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
                                     <span
                                         class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                                        03
+                                        {{-- Logika untuk menghitung item keranjang --}}
+                                        @php
+                                            $cartItemCount = 0;
+                                            if (Auth::check()) {
+                                                $cartItemCount = Auth::user()->keranjang->sum('jumlah');
+                                            }
+                                        @endphp
+                                        {{ $cartItemCount }}
                                     </span>
                                 </a>
                             </li>
                         </ul>
-
                     </div>
-
                 </div>
-
             </div>
-
         </nav>
-
-
-
     </div>
 </header>
