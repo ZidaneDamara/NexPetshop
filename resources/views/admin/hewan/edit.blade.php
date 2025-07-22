@@ -142,14 +142,28 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
+                                        <label for="pemasok_id" class="form-label">Pemasok Hewan</label>
+                                        <select class="form-control @error('pemasok_id') is-invalid @enderror"
+                                            id="pemasok_id" name="pemasok_id">
+                                            <option value="">Pilih Pemasok (Opsional)</option>
+                                            @foreach ($pemasoks as $pemasok)
+                                                <option value="{{ $pemasok->id }}"
+                                                    {{ old('pemasok_id', $hewan->pemasok_id) == $pemasok->id ? 'selected' : '' }}>
+                                                    {{ $pemasok->nama_pemasok }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('pemasok_id')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="gambar" class="form-label">Gambar</label>
                                         <input type="file" class="form-control @error('gambar') is-invalid @enderror"
-                                            id="gambar" name="gambar" accept="image/*"> {{-- Hapus multiple --}}
+                                            id="gambar" name="gambar" accept="image/*">
                                         @error('gambar')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                         @if ($hewan->gambar)
-                                            {{-- Cek jika ada gambar --}}
                                             <div class="mt-2">
                                                 <h6>Gambar Saat Ini:</h6>
                                                 <img src="{{ Storage::url($hewan->gambar) }}" alt="Gambar Hewan"

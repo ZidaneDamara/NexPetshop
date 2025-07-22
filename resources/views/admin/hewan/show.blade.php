@@ -29,6 +29,7 @@
                                 <p><strong>Berat:</strong> {{ $hewan->berat ?? '-' }} kg</p>
                                 <p><strong>Warna:</strong> {{ $hewan->warna ?? '-' }}</p>
                                 <p><strong>Kategori:</strong> {{ $hewan->kategori->nama_kategori }}</p>
+                                <p><strong>Pemasok:</strong> {{ $hewan->pemasok->nama_pemasok ?? '-' }}</p>
                             </div>
                             <div class="col-md-6">
                                 <p><strong>Deskripsi:</strong> {{ $hewan->deskripsi ?? '-' }}</p>

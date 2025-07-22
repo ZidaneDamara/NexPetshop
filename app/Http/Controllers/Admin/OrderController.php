@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Mutasi; // Import the Mutasi model
 
 class OrderController extends Controller
 {
@@ -33,8 +34,24 @@ class OrderController extends Controller
             'status' => 'required|in:pending,diproses,selesai,dibatalkan',
         ]);
 
+        $oldStatus = $order->status; // Simpan status lama
         $order->status = $request->status;
+        $order->load('orderItems'); // Load orderItems relationship
         $order->save();
+
+        // Catat mutasi 'keluar' jika status berubah menjadi 'selesai'
+        if ($oldStatus !== 'selesai' && $order->status === 'selesai') {
+            foreach ($order->orderItems as $item) {
+                Mutasi::create([
+                    'hewan_id' => $item->hewan_id,
+                    'jumlah' => $item->jumlah,
+                    'tipe_mutasi' => 'keluar',
+                    'referensi_id' => $order->id,
+                    'referensi_type' => 'App\Models\Order',
+                    'deskripsi' => 'Penjualan hewan melalui pesanan selesai.',
+                ]);
+            }
+        }
 
         return redirect()->route('orders.index')->with('success', 'Status pesanan berhasil diperbarui.');
     }

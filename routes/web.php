@@ -9,6 +9,8 @@ use App\Http\Controllers\HewanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\Admin\MutasiController;
+use App\Http\Controllers\Admin\PemasokController;
 use App\Http\Controllers\KategoriHewanController;
 use App\Http\Controllers\RekeningPembayaranController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController; // Alias untuk Admin OrderController
@@ -73,10 +75,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::resource('kategori', KategoriHewanController::class);
         Route::resource('hewan', HewanController::class);
         Route::resource('rekening-pembayaran', RekeningPembayaranController::class);
+        Route::resource('pemasok', PemasokController::class); // Tambahkan baris ini
 
         // Rute Manajemen Pesanan (Admin)
         Route::resource('orders', AdminOrderController::class)->except(['create', 'store', 'edit']);
         Route::put('orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+
+        Route::get('mutasi', [MutasiController::class, 'index'])->name('admin.mutasi.index');
     });
 });
 

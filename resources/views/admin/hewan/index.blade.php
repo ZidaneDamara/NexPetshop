@@ -41,6 +41,7 @@
                                         <th>Harga</th>
                                         <th>Stok</th>
                                         <th>Kategori</th>
+                                        <th>Pemasok</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -64,6 +65,7 @@
                                             <td>Rp {{ number_format($hewan->harga, 0, ',', '.') }}</td>
                                             <td>{{ $hewan->stok }}</td>
                                             <td>{{ $hewan->kategori->nama_kategori }}</td>
+                                            <td>{{ $hewan->pemasok->nama_pemasok ?? '-' }}</td>
                                             <td>
                                                 <a href="{{ route('hewan.show', $hewan->id) }}"
                                                     class="btn btn-info btn-sm">Lihat</a>

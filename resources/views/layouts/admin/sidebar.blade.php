@@ -61,6 +61,12 @@
                                     <span class="sub-item">Daftar Rekening</span>
                                 </a>
                             </li>
+                            <li class="{{ request()->routeIs('admin.pemasok.*') ? 'active' : '' }}">
+                                {{-- Tambahkan baris ini --}}
+                                <a href="{{ route('pemasok.index') }}">
+                                    <span class="sub-item">Manajemen Pemasok</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -68,6 +74,12 @@
                     <a href="{{ route('orders.index') }}">
                         <i class="fas fa-shopping-cart"></i> {{-- Icon keranjang atau pesanan --}}
                         <p>Manajemen Pesanan</p>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->routeIs('admin.mutasi.*') ? 'active' : '' }}"> {{-- Tambahkan baris ini --}}
+                    <a href="{{ route('admin.mutasi.index') }}">
+                        <i class="fas fa-exchange-alt"></i> {{-- Icon untuk mutasi --}}
+                        <p>Mutasi Stok</p>
                     </a>
                 </li>
             </ul>

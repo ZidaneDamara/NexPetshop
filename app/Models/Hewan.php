@@ -19,19 +19,33 @@ class Hewan extends Model
         'stok',
         'status_kesehatan',
         'sudah_vaksin',
-        'gambar',
+        'gambar', // Pastikan 'gambar' tetap fillable
         'berat',
         'warna',
         'kategori_hewan_id',
+        'pemasok_id', // Tambahkan baris ini
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
     // protected $casts = [
-    //     'gambar' => 'array',
+    //     // 'gambar' => 'array', // Hapus baris ini
     //     'sudah_vaksin' => 'boolean',
     // ];
 
+    /**
+     * Get the kategori that owns the hewan.
+     */
     public function kategori()
     {
         return $this->belongsTo(KategoriHewan::class, 'kategori_hewan_id');
+    }
+
+    public function pemasok()
+    {
+        return $this->belongsTo(Pemasok::class);
     }
 }
